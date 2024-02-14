@@ -1,8 +1,11 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, FastAPI
+
+from app.routers import speech_to_text
 
 app = FastAPI()
 
+api_router = APIRouter(prefix="/api/v1")
 
-@app.get("/")
-async def root() -> dict[str, str]:
-    return {"message": "Hello World"}
+api_router.include_router(speech_to_text.router)
+
+app.include_router(api_router)
