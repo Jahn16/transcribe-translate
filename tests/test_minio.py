@@ -17,27 +17,22 @@ def settings():
     )
 
 
-@pytest.fixture(scope="module")
-def repo(settings: Settings):
-    return MinioRepository(settings)
-
-
 @pytest.fixture
 def file_data():
     data = BytesIO(b"data")
     file_name = "test.file"
     file_size = 3
 
-    return (data, file_name, file_size)
+    return (file_name, data, file_size)
 
 
 def test_upload_file(
-    repo: MinioRepository,
     settings: Settings,
     file_data: tuple[BytesIO, str, int],
     mocker: MockerFixture,
 ):
     mock = mocker.patch("app.repositories.minio.Minio")
+    repo = MinioRepository(settings)
 
     mock().bucket_exists.return_value = True
     repo.upload_file(*file_data)
@@ -49,12 +44,13 @@ def test_upload_file(
 
 
 def test_upload_file_no_bucket(
-    repo: MinioRepository,
     settings: Settings,
     file_data: tuple[BytesIO, str, int],
     mocker: MockerFixture,
 ):
     mock = mocker.patch("app.repositories.minio.Minio")
+    repo = MinioRepository(settings)
+
     mock().bucket_exists.return_value = False
     repo.upload_file(*file_data)
 
@@ -64,10 +60,10 @@ def test_upload_file_no_bucket(
     )
 
 
-def test_get_presigned_url(
-    repo: MinioRepository, settings: Settings, mocker: MockerFixture
-):
+def test_get_presigned_url(settings: Settings, mocker: MockerFixture):
     mock = mocker.patch("app.repositories.minio.Minio")
+    repo = MinioRepository(settings)
+
     mock().presigned_get_object.return_value = "url"
 
     url = repo.get_presigned_url("file_name")
