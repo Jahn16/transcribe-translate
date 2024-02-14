@@ -69,6 +69,6 @@ def test_get_presigned_url(settings: Settings, mocker: MockerFixture):
     url = repo.get_presigned_url("file_name")
 
     mock().presigned_get_object.assert_called_once_with(
-        "http", settings.minio_bucket_name, "file_name"
+        settings.minio_bucket_name, "file_name"
     )
     assert url == "url"
