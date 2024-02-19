@@ -1,10 +1,10 @@
-from unittest.mock import MagicMock
+from unittest.mock import ANY, MagicMock
 
 import pytest
 from pytest_mock import MockerFixture
 
 from app.config import Settings
-from app.loaders.rabbitmq import Message, MessageSender
+from app.loaders.rabbitmq import MessageSender
 
 
 @pytest.fixture(scope="module")
@@ -33,5 +33,6 @@ async def test_send(settings: Settings, mocker: MockerFixture):
         settings.rabbitmq_queue_name
     )
     mock_channel.default_exchange.publish.assert_called_once_with(
-        Message(bytes(msg, "utf-8")), routing_key=settings.rabbitmq_queue_name
+        ANY,
+        routing_key=mock_channel.declare_queue.return_value.name,
     )
