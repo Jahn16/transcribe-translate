@@ -14,6 +14,8 @@ def settings():
         minio_access_key="access",
         minio_secret_key="secret",
         minio_bucket_name="bucket",
+        rabbitmq_url="url",
+        rabbitmq_queue_name="queue",
     )
 
 
