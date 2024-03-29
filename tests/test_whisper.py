@@ -22,11 +22,11 @@ def test_translate(
 ) -> None:
     whisper = Whisper(settings)
     whisper_mock = mocker.patch("app.providers.whisper.WhisperModel")
-    whisper_mock.assert_called_once_with(
+    segments_mock, info_mock = ([MagicMock()], MagicMock())
+    whisper_mock().transcribe.return_value = (segments_mock, info_mock)
+    result = whisper.transcribe(audio)
+    whisper_mock.assert_called_with(
         settings.whisper_model, device=settings.whisper_device
     )
-    segments_mock, info_mock = (MagicMock(), MagicMock())
-    whisper_mock.transcribe.return_value = (segments_mock, info_mock)
-    result = whisper.transcribe(audio)
-    whisper_mock.transcribe.assert_called_once_with(audio)
+    whisper_mock().transcribe.assert_called_once_with(audio)
     assert result == segments_mock
