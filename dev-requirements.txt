@@ -14,6 +14,10 @@ identify==2.5.35
     # via pre-commit
 iniconfig==2.0.0
     # via pytest
+mypy==1.9.0
+    # via -r dev-requirements.in
+mypy-extensions==1.0.0
+    # via mypy
 nodeenv==1.8.0
     # via pre-commit
 packaging==24.0
@@ -35,6 +39,8 @@ pytest-mock==3.14.0
     # via -r dev-requirements.in
 pyyaml==6.0.1
     # via pre-commit
+typing-extensions==4.10.0
+    # via mypy
 virtualenv==20.25.1
     # via pre-commit
 
