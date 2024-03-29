@@ -9,7 +9,7 @@ class Whisper:
         self._model_size = settings.whisper_model
         self._device = settings.whisper_device
 
-    def transcribe(self, audio_path: str) -> list[Segment]:
+    def transcribe(self, audio_path: str) -> tuple[str, list[Segment]]:
         model = WhisperModel(self._model_size, device=self._device)
-        segments, _ = model.transcribe(audio_path)
-        return list(segments)
+        segments, info = model.transcribe(audio_path)
+        return info.language, list(segments)
