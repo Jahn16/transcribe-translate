@@ -3,4 +3,4 @@ uvicorn
 python-multipart
 pydantic-settings
 faster-whisper
-
+argostranslate
