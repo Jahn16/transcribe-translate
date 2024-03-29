@@ -59,5 +59,7 @@ def test_translate(
     from_code, to_code = "en", "pt"
     result = translator.translate(sentence, from_code, to_code)
 
-    translate_mock.translate.assert_called_once_with(sentences[0], "en", "de")
+    translate_mock.translate.assert_called_once_with(
+        sentences[0], from_code, to_code
+    )
     assert result == translation
