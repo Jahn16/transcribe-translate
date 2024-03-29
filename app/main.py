@@ -1,6 +1,9 @@
 from fastapi import APIRouter, FastAPI
 
 from app.routers import speech_to_text
+from app.utils.logging import setup_logging
+
+setup_logging()
 
 app = FastAPI()
 
