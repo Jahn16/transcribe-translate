@@ -24,7 +24,7 @@ def test_translate(
     whisper_mock = mocker.patch("app.providers.whisper.WhisperModel")
     segments_mock, info_mock = ([MagicMock()], MagicMock())
     lang = "de"
-    info_mock.mock.language = lang
+    info_mock.language = lang
     whisper_mock().transcribe.return_value = (segments_mock, info_mock)
     result = whisper.transcribe(audio)
     whisper_mock.assert_called_with(
