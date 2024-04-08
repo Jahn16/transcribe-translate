@@ -4,3 +4,4 @@ python-multipart
 pydantic-settings
 faster-whisper
 argostranslate
+structlog
