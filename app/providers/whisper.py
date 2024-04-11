@@ -8,9 +8,9 @@ logger = structlog.get_logger()
 
 
 class Whisper:
-    def __init__(self, settings: Settings):
-        self._model_size = settings.whisper_model
-        self._device = settings.whisper_device
+    def __init__(self, model_size: str, device: str):
+        self._model_size = model_size
+        self._device = device
 
     def transcribe(self, audio_path: str) -> tuple[str, list[Segment]]:
         model = WhisperModel(self._model_size, device=self._device)
