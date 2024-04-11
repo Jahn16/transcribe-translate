@@ -3,5 +3,5 @@ uvicorn
 python-multipart
 pydantic-settings
 faster-whisper
-argostranslate
+argostranslate @ git+https://github.com/ddorian/argos-translate.git@upgrade-ctranslate2-4
 structlog
