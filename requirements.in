@@ -5,3 +5,4 @@ pydantic-settings
 faster-whisper
 argostranslate @ git+https://github.com/ddorian/argos-translate.git@upgrade-ctranslate2-4
 structlog
+celery[redis]
