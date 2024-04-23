@@ -8,7 +8,7 @@ router = APIRouter(prefix="/tasks")
 
 
 @router.get("/{task_id}")
-def get_status(task_id: str):
+def get_status(task_id: str) -> JSONResponse:
     task_result = AsyncResult(task_id, app=app)
     return JSONResponse(
         {
