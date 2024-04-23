@@ -21,9 +21,8 @@ def transcribe(
 
 
 @app.task
-def translate(input: tuple[str, str], to_lang: str):
+def translate(input: tuple[str, str], to_lang: str) -> str:
     from_lang, sentences = input
-    # to_lang = "pt"
     translator = ArgosTranslate()
     use_case = TranslateUseCase(translator)
     return use_case.execute(sentences, from_lang, to_lang)
